@@ -29,13 +29,11 @@ type [<TestFixture>] Tests () =
     [<TestCaseSource("seqFuncs")>]
     member this.``Seq function has a mapping`` (funcName:string) =
         SeqAndLinq.mappings
-        |> Seq.collect (fun m -> m.SeqFuncs)
-        |> Seq.map (fun f -> f.Name)
+        |> Seq.map (fun m -> m.SeqFunc.Name)
         |> shouldContain funcName
 
     [<TestCaseSource("linqMethods")>]
     member this.``Linq method has a mapping`` (methodName:string) =
         SeqAndLinq.mappings
-        |> Seq.collect (fun m -> m.LinqMethods)
-        |> Seq.map (fun f -> f.Name)
+        |> Seq.map (fun m -> m.LinqMethod.Name)
         |> shouldContain methodName
