@@ -3,7 +3,8 @@
 open SeqAndLinq
 
 let renderNameAndSample nameAndSample =
-    sprintf "**%s**<br>Ex: `%s`" nameAndSample.Name nameAndSample.Sample
+    let boldName = if nameAndSample.Name = "" then "" else sprintf "**%s**" nameAndSample.Name
+    sprintf "%s<br>Ex: `%s`" boldName nameAndSample.Sample
 
 let intro = @"
 # Mappings between F# Seq and LINQ
