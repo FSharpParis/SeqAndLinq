@@ -1,0 +1,7 @@
+source https://nuget.org/api/v2
+
+nuget FAKE
+nuget NUnit ~> 2.0
+nuget NUnit.Runners ~> 2.0
+
+github forki/FsUnit FsUnit.fs

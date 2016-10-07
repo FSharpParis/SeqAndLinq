@@ -1,0 +1,8 @@
+NUGET
+  remote: https://www.nuget.org/api/v2
+    FAKE (4.40.1)
+    NUnit (2.6.4)
+    NUnit.Runners (2.6.4)
+GITHUB
+  remote: forki/FsUnit
+    FsUnit.fs (f536bd5ed0eba8b38d2b01ae79d64e4e14fbd0a6)
