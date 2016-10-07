@@ -1,7 +1,14 @@
-This is a starter project to use in F# coding dojos.
 
-It just embeds FAKE, Paket, and references to NUnit, as well as @sforkmann's lightweight FsUnit.fs file.
+# Mappings between F# Seq and LINQ
 
-Just clone the repo or download it, and get started coding and testing in F#!
+This is an attempt do build an exhaustive list of mappings between
+F# sequence manipulation functions and LINQ's extension methods on
+`IEnumerable<T>`, in order to ease the transition for C# devs.
 
-To get started, just run build.cmd or ./build.sh in the folder. The first build should fail, as one of the 2 tests is a failing one. You're first task could be to fix it :)
+The current list is absolutely **NOT** complete. Running the
+unit tests will tell you which mappings are missing, so please
+contribute!
+
+|F# Seq functions|LINQ methods|Explanation|
+|---|---|---|
+|**append**<br>Ex: `Seq.append [1; 2; 3] [4; 5; 6]`|**Concat**<br>Ex: `(new[] {1, 2, 3}).Concat(new[] {4, 5, 6})`|Wraps the two given enumerations as a single concatenated enumeration.|

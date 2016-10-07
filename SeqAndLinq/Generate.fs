@@ -28,5 +28,5 @@ let markdown = seq {
         yield sprintf "|%s|%s|%s|" seqSide linqSide mapping.Explanation
 }
 
-let outputFile = System.IO.Path.Combine(__SOURCE_DIRECTORY__, "README.md")
+let outputFile = System.IO.Path.Combine(__SOURCE_DIRECTORY__, "..", "README.md")
 System.IO.File.WriteAllLines(outputFile, markdown)
