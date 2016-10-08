@@ -11,8 +11,6 @@ type Mapping = {
     Explanation: string
 }
 
-let sand = [1; 2; 3] |> Seq.fold (sprintf "%s%i") ""
-
 let mappings: Mapping list =
     [
         {
