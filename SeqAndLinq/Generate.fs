@@ -73,15 +73,15 @@ let markdown =
         yield "|---|---|---|"
         for mapping in mappings do
             let linqSide =
-                sprintf "**%s**<br>Ex: `%s`" mapping.LinqMethod.Name mapping.LinqMethod.Sample
+                sprintf "**%s**<br />Ex: <nobr>`%s`</nobr>" mapping.LinqMethod.Name mapping.LinqMethod.Sample
 
             let seqSide =
                 if mapping.SeqFunc.Name <> "" then
                     let func = seqFuncs.[mapping.SeqFunc.Name]
                     let typeSignature = getTypeSignature func
-                    sprintf "**%s**<br>`%O`<br>Ex: `%s`" mapping.SeqFunc.Name typeSignature mapping.SeqFunc.Sample
+                    sprintf "**%s**<br /><nobr>`%O`</nobr><br />Ex: <nobr>`%s`</nobr>" mapping.SeqFunc.Name typeSignature mapping.SeqFunc.Sample
                 else
-                    sprintf "`%s`" mapping.SeqFunc.Sample
+                    sprintf "<nobr>`%s`</nobr>" mapping.SeqFunc.Sample
 
             yield sprintf "|%s|%s|%s|" linqSide seqSide mapping.Explanation
     }
