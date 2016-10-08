@@ -72,18 +72,32 @@ let markdown =
         yield "|LINQ methods|F# Seq functions|Explanation|"
         yield "|---|---|---|"
         for mapping in mappings do
-            let linqSide =
-                sprintf "**%s**<br />Ex: <nobr>`%s`</nobr>" mapping.LinqMethod.Name mapping.LinqMethod.Sample
-
+            let linqSide = sprintf "**%s**" mapping.LinqMethod.Name
             let seqSide =
-                if mapping.SeqFunc.Name <> "" then
-                    let func = seqFuncs.[mapping.SeqFunc.Name]
-                    let typeSignature = getTypeSignature func
-                    sprintf "**%s**<br /><nobr>`%O`</nobr><br />Ex: <nobr>`%s`</nobr>" mapping.SeqFunc.Name typeSignature mapping.SeqFunc.Sample
-                else
-                    sprintf "<nobr>`%s`</nobr>" mapping.SeqFunc.Sample
+                if mapping.SeqFunc.Name <> ""
+                then sprintf "**%s**" mapping.SeqFunc.Name
+                else ""
 
-            yield sprintf "|%s|%s|%s|" linqSide seqSide mapping.Explanation
+            let details =
+                seq {
+                    yield mapping.Explanation
+                    yield ""
+
+                    yield sprintf "**%s** in LINQ" mapping.LinqMethod.Name
+                    yield sprintf "Ex: `%s`" mapping.LinqMethod.Sample
+                    yield ""
+
+                    if mapping.SeqFunc.Name <> "" then
+                        let func = seqFuncs.[mapping.SeqFunc.Name]
+                        let typeSignature = getTypeSignature func
+                        yield sprintf "becomes in F# **%s**: `%O`" mapping.SeqFunc.Name typeSignature
+                    else
+                        yield "becomes in F#:"
+
+                    yield sprintf "`%s`" mapping.SeqFunc.Sample }
+                |> String.concat "<br>"
+
+            yield sprintf "|%s|%s|%s|" linqSide seqSide details
     }
 
 let outputFile = System.IO.Path.Combine(__SOURCE_DIRECTORY__, "..", "README.md")
