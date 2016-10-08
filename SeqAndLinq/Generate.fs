@@ -87,14 +87,13 @@ let markdown =
                     yield sprintf "Ex: `%s`" mapping.LinqMethod.Sample
                     yield ""
 
+                    yield "becomes in F#:"
                     if mapping.SeqFunc.Name <> "" then
                         let func = seqFuncs.[mapping.SeqFunc.Name]
                         let typeSignature = getTypeSignature func
-                        yield sprintf "becomes in F# **%s**: `%O`" mapping.SeqFunc.Name typeSignature
-                    else
-                        yield "becomes in F#:"
+                        yield sprintf "**%s**: `%O`" mapping.SeqFunc.Name typeSignature
 
-                    yield sprintf "`%s`" mapping.SeqFunc.Sample }
+                    yield sprintf "Ex: `%s`" mapping.SeqFunc.Sample }
                 |> String.concat "<br>"
 
             yield sprintf "|%s|%s|%s|" linqSide seqSide details
