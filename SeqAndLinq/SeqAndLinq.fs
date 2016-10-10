@@ -86,6 +86,48 @@ let mappings: Mapping list =
         {
             LinqMethod =
                 {
+                    Name = "Average"
+                    Sample = "(new[] {1.0, 2.0, 3.0}).Average()"
+                }
+            SeqFunc =
+                {
+                    Name = "average"
+                    Sample = "[1.0; 2.0; 3.0] |> Seq.average"
+                }
+            Explanation = @"Computes the average value of the items. `Seq.average` doesn't take any other argument than the input sequence. If the items in the sequence need to be projected to a value before computing the average, `Seq.averageBy` must be used."
+        }
+
+        {
+            LinqMethod =
+                {
+                    Name = "Average"
+                    Sample = "(new[] {\"a\", \"bb\", \"ccc\"}).Average(s => s.Length)"
+                }
+            SeqFunc =
+                {
+                    Name = "averageBy"
+                    Sample = "[\"a\"; \"bb\"; \"ccc\"] |> Seq.averageBy (fun s -> float s.Length)"
+                }
+            Explanation = @"Computes the average of the values projected from the items in the sequence with the provided projection function. It is semantically equivalent to `fun f -> Seq.map f >> Seq.average`."
+        }
+
+        {
+            LinqMethod =
+                {
+                    Name = "Cast"
+                    Sample = "(new object[] {1, 2, 3}).Cast<int>()"
+                }
+            SeqFunc =
+                {
+                    Name = "cast"
+                    Sample = "[1 :> obj; 2 :> obj; 3 :> obj] |> Seq.cast<int>"
+                }
+            Explanation = @"Casts (either up or down) a sequence of one type to a sequence of another type."
+        }
+
+        {
+            LinqMethod =
+                {
                     Name = "Concat"
                     Sample = "(new[] {1, 2, 3}).Concat(new[] {4, 5, 6})"
                 }
