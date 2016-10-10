@@ -138,4 +138,46 @@ let mappings: Mapping list =
                 }
             Explanation = @"Wraps the two given enumerations as a single concatenated enumeration."
         }
+
+        {
+            LinqMethod =
+                {
+                    Name = "Select"
+                    Sample = "(new[] {1, 2, 3}).Select(i => i * 2)"
+                }
+            SeqFunc =
+                {
+                    Name = "map"
+                    Sample = "[1; 2; 3] |> Seq.map (fun i -> i * 2)"
+                }
+            Explanation = @"Maps every element of the input sequence to an element in the output sequence using the provided mapping function."
+        }
+
+        {
+            LinqMethod =
+                {
+                    Name = "SelectMany"
+                    Sample = "(new[] {1, 2, 3}).SelectMany(i => Enumerable.Range(0, i))"
+                }
+            SeqFunc =
+                {
+                    Name = "collect"
+                    Sample = "[1; 2; 3] |> Seq.collect (fun i -> Seq.init i id)"
+                }
+            Explanation = @"For each element of the input sequence, use the provided generator function to generate a sequence and elements, and collect all the generated elements into a single sequence. `Seq.collect f` is semantically equivalent to `Seq.map f >> Seq.concat`."
+        }
+
+        {
+            LinqMethod =
+                {
+                    Name = "SelectMany"
+                    Sample = "(new[] {(new[] {1, 2, 3}), (new[] {4, 5, 6}), (new[] {7})}).SelectMany(x => x)"
+                }
+            SeqFunc =
+                {
+                    Name = "concat"
+                    Sample = "[[1; 2; 3]; [4; 5; 6]; [7]] |> Seq.concat"
+                }
+            Explanation = @"Concatenates a sequence of sequences into a single sequence. `Seq.concat` is semantically equivalent to `Seq.collect id`."
+        }
     ]
