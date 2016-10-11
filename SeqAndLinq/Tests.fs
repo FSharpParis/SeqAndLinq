@@ -22,6 +22,7 @@ type [<TestFixture>] Tests () =
     member this.linqMethods =
         typeof<System.Linq.Enumerable>
             .GetMethods(System.Reflection.BindingFlags.Static ||| System.Reflection.BindingFlags.Public)
+        |> Seq.filter (fun m -> m.CustomAttributes |> Seq.exists (fun a -> a.AttributeType = typeof<System.Runtime.CompilerServices.ExtensionAttribute>))
         |> Seq.map (fun m -> m.Name)
         |> Seq.distinct
         |> Seq.toArray

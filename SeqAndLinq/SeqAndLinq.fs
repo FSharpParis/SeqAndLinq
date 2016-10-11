@@ -142,6 +142,48 @@ let mappings: Mapping list =
         {
             LinqMethod =
                 {
+                    Name = "Contains"
+                    Sample = "(new[] {1, 2, 3}).Contains(2)"
+                }
+            SeqFunc =
+                {
+                    Name = "contains"
+                    Sample = "[1; 2; 3] |> Seq.contains 2"
+                }
+            Explanation = @"Checks whether a sequence contains the given element."
+        }
+
+        {
+            LinqMethod =
+                {
+                    Name = "Count"
+                    Sample = "(new[] {1, 2, 3}).Count())"
+                }
+            SeqFunc =
+                {
+                    Name = "length"
+                    Sample = "[1; 2; 3] |> Seq.length"
+                }
+            Explanation = @"Evaluates to the length of the sequence."
+        }
+
+        {
+            LinqMethod =
+                {
+                    Name = "DefaultIfEmpty"
+                    Sample = "(new int[] {}).DefaultIfEmpty(2)"
+                }
+            SeqFunc =
+                {
+                    Name = ""
+                    Sample = "[] |> fun s -> if Seq.isEmpty s then [2] else s"
+                }
+            Explanation = @"Seriously? Who uses that method?"
+        }
+
+        {
+            LinqMethod =
+                {
                     Name = "Select"
                     Sample = "(new[] {1, 2, 3}).Select(i => i * 2)"
                 }
@@ -179,5 +221,47 @@ let mappings: Mapping list =
                     Sample = "[[1; 2; 3]; [4; 5; 6]; [7]] |> Seq.concat"
                 }
             Explanation = @"Concatenates a sequence of sequences into a single sequence. `Seq.concat` is semantically equivalent to `Seq.collect id`."
+        }
+
+        {
+            LinqMethod =
+                {
+                    Name = "Where"
+                    Sample = "(new[] {1, 2, 3}).Where(x > 2)"
+                }
+            SeqFunc =
+                {
+                    Name = "where"
+                    Sample = "[1; 2; 3] |> Seq.where (fun x -> x > 2)"
+                }
+            Explanation = @"Returns a filtered sequence containing only the elements of the input sequence which satisfy the provided predicate. Alternatively `Seq.filter` can also be used and does exactly the same."
+        }
+
+        {
+            LinqMethod =
+                {
+                    Name = "Zip"
+                    Sample = "(new[] { 1, 2, 3 }).Zip((new[] { 4, 5, 6 }), Tuple.Create)"
+                }
+            SeqFunc =
+                {
+                    Name = "zip"
+                    Sample = "Seq.zip [1; 2; 3] [4; 5; 6]"
+                }
+            Explanation = @"Zips two sequences by creating a sequence of tuples of elements taken from both seuqences. The LINQ version alays requires a function to project the two items taken from both sequences. In that particular case, projecting with `Tuple.Create` will  do the same as the F# `zip` function."
+        }
+
+        {
+            LinqMethod =
+                {
+                    Name = "Zip"
+                    Sample = "(new[] { 1, 2, 3 }).Zip((new[] { 4, 5, 6 }), (x, y) => x * y)"
+                }
+            SeqFunc =
+                {
+                    Name = "map2"
+                    Sample = "([1; 2; 3], [4; 5; 6]) ||> Seq.map2 (*)"
+                }
+            Explanation = @"The LINQ version of `Zip` takes an argument to project the result from the items taken in both sequences. The F# equivalent of this is a `map2`."
         }
     ]
